@@ -15,7 +15,7 @@ class LLMProvider(ABC):
 
 class AnthropicProvider(LLMProvider):
     def __init__(self):
-        self.api_key = st.secrets.get("ANTHROPIC_API_KEY")
+        self.api_key = st.session_state.api_keys.get("ANTHROPIC_API_KEY", "")
 
     def validate_api_key(self) -> bool:
         return bool(self.api_key)
@@ -27,7 +27,7 @@ class AnthropicProvider(LLMProvider):
             client = Anthropic(api_key=self.api_key)
 
             response = client.messages.create(
-                model="claude-3.7-sonnet-latest",
+                model="claude-3-sonnet-20240229",
                 max_tokens=1000,
                 temperature=0.7,
                 messages=[
@@ -42,7 +42,7 @@ class AnthropicProvider(LLMProvider):
 
 class OpenAIProvider(LLMProvider):
     def __init__(self):
-        self.api_key = st.secrets.get("OPENAI_API_KEY")
+        self.api_key = st.session_state.api_keys.get("OPENAI_API_KEY", "")
 
     def validate_api_key(self) -> bool:
         return bool(self.api_key)
@@ -69,8 +69,7 @@ class OpenAIProvider(LLMProvider):
 
 class GoogleVertexProvider(LLMProvider):
     def __init__(self):
-        self.api_key = st.secrets.get("GOOGLE_API_KEY")
-        self.project_id = st.secrets.get("GOOGLE_PROJECT_ID", "")
+        self.api_key = st.session_state.api_keys.get("GOOGLE_API_KEY", "")
 
     def validate_api_key(self) -> bool:
         return bool(self.api_key)
@@ -81,7 +80,7 @@ class GoogleVertexProvider(LLMProvider):
 
             genai.configure(api_key=self.api_key)
 
-            model = genai.GenerativeModel('gemini-2.5-pro')
+            model = genai.GenerativeModel('gemini-1.5-pro')
             response = model.generate_content(prompt)
 
             return response.text

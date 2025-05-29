@@ -905,8 +905,8 @@ A Streamlit application for evaluating and comparing responses from multiple Lar
 
 1. Clone this repository
 2. Install dependencies: `pip install -r requirements.txt`
-3. Create `.streamlit/secrets.toml` with your API keys
-4. Run: `streamlit run app.py`
+3. Run the app: `streamlit run app.py`
+4. Enter your API keys on the **API Keys** page
 
 ## CSV Format
 
