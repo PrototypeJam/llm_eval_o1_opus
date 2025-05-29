@@ -11,7 +11,8 @@ def show():
     
     # API key inputs
     st.subheader("Enter API Keys")
-    
+
+    # Anthropic
     anthropic_key = st.text_input(
         "Anthropic API Key (for Claude)",
         value=st.session_state.api_keys.get('ANTHROPIC_API_KEY', ''),
@@ -20,7 +21,8 @@ def show():
     )
     if anthropic_key:
         st.session_state.api_keys['ANTHROPIC_API_KEY'] = anthropic_key
-    
+
+    # OpenAI
     openai_key = st.text_input(
         "OpenAI API Key (for GPT-4o)",
         value=st.session_state.api_keys.get('OPENAI_API_KEY', ''),
@@ -29,7 +31,8 @@ def show():
     )
     if openai_key:
         st.session_state.api_keys['OPENAI_API_KEY'] = openai_key
-    
+
+    # Google
     google_key = st.text_input(
         "Google API Key (for Gemini)",
         value=st.session_state.api_keys.get('GOOGLE_API_KEY', ''),

@@ -1,5 +1,10 @@
 import streamlit as st
 import time
+import sys
+import os
+
+# Add parent directory to path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from services.llm_factory import LLMFactory
 from services.csv_processor import CSVProcessor
 
@@ -27,6 +32,7 @@ def show():
 
     if not provider or not provider.validate_api_key():
         st.error(f"❌ API key not configured for {selected_model}")
+        st.info("Please go to the API Keys page to configure your API keys.")
         st.stop()
 
     st.success(f"✅ {selected_model} is ready to use")

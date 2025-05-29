@@ -1,7 +1,12 @@
 import streamlit as st
 import pandas as pd
-from services.csv_processor import CSVProcessor
 from datetime import datetime
+import sys
+import os
+
+# Add parent directory to path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from services.csv_processor import CSVProcessor
 
 def show():
     st.header("📊 Results & Export")
