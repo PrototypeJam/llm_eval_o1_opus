@@ -4,7 +4,6 @@
 # streamlit run app.py
 
 import streamlit as st
-from streamlit_option_menu import option_menu
 
 # Page configuration
 st.set_page_config(
@@ -21,24 +20,29 @@ if 'processed_results' not in st.session_state:
     st.session_state.processed_results = None
 if 'selected_model' not in st.session_state:
     st.session_state.selected_model = None
+if 'api_keys' not in st.session_state:
+    st.session_state.api_keys = {
+        'ANTHROPIC_API_KEY': '',
+        'OPENAI_API_KEY': '',
+        'GOOGLE_API_KEY': ''
+    }
 
 # Title
 st.title("🤖 Multi-Model LLM Evaluation Tool")
 
 # Sidebar navigation
-with st.sidebar:
-    st.header("Navigation")
-    page = option_menu(
-        menu_title=None,
-        options=["Home", "Upload Data", "Process", "Results"],
-        icons=["house", "cloud-upload", "cpu", "graph-up"],
-        default_index=0,
-    )
+page = st.sidebar.selectbox(
+    "Navigation",
+    ["Home", "API Keys", "Upload Data", "Process", "Results"]
+)
 
 # Page routing
 if page == "Home":
     from pages import home
     home.show()
+elif page == "API Keys":
+    from pages import api_keys
+    api_keys.show()
 elif page == "Upload Data":
     from pages import upload
     upload.show()

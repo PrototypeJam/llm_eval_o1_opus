@@ -14,16 +14,11 @@ def show():
     - **Export Results**: Download results with model outputs
 
     ### 📋 How to Use
-    1. **Upload Data**: Upload a CSV file with columns: `input`, `output`, `expected`
-    2. **Select Model**: Choose which LLM to use for processing
-    3. **Process**: Run your prompts through the selected model
-    4. **Download Results**: Export the results with model responses
-
-    ### 🔑 API Keys Required
-    Make sure the following API keys are configured in your deployment:
-    - `ANTHROPIC_API_KEY` for Claude
-    - `OPENAI_API_KEY` for GPT-4o
-    - `GOOGLE_API_KEY` for Gemini
+    1. **Configure API Keys**: Go to the API Keys page to enter your API credentials
+    2. **Upload Data**: Upload a CSV file with columns: `input`, `output`, `expected`
+    3. **Select Model**: Choose which LLM to use for processing
+    4. **Process**: Run your prompts through the selected model
+    5. **Download Results**: Export the results with model responses
 
     ### 📊 CSV Format Example
     ```csv
@@ -38,19 +33,22 @@ def show():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        if st.secrets.get("ANTHROPIC_API_KEY"):
+        if st.session_state.api_keys.get("ANTHROPIC_API_KEY"):
             st.success("✅ Anthropic API Key")
         else:
             st.error("❌ Anthropic API Key Missing")
 
     with col2:
-        if st.secrets.get("OPENAI_API_KEY"):
+        if st.session_state.api_keys.get("OPENAI_API_KEY"):
             st.success("✅ OpenAI API Key")
         else:
             st.error("❌ OpenAI API Key Missing")
 
     with col3:
-        if st.secrets.get("GOOGLE_API_KEY"):
+        if st.session_state.api_keys.get("GOOGLE_API_KEY"):
             st.success("✅ Google API Key")
         else:
             st.error("❌ Google API Key Missing")
+
+    if not any(st.session_state.api_keys.values()):
+        st.warning("⚠️ Please configure at least one API key to get started!")
