@@ -1,3 +1,12 @@
+ToDo
+
+* make ready to deploy
+* get deeper logging 
+* add llm-as-a-judge reasoning
+* add synthetic data generator
+
+______
+
 # Response - 4 Opus
 
 Based on my research, I now have comprehensive information about deploying multi-file Streamlit applications to Community Cloud and integrating various LLM APIs. Let me provide you with the detailed documentation and development plan you requested.
